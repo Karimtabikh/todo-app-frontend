@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { Lock, Mail, User } from "lucide-react";
+import { Lock, Mail } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -66,7 +66,6 @@ export default function SignInPage() {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
         </div>
-        <input type="hidden" name="action" value="signup" />
         <Button type="submit" className="w-full">
           Login
         </Button>

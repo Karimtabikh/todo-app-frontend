@@ -84,7 +84,6 @@ export default function SignUpPage() {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
         </div>
-        <input type="hidden" name="action" value="signup" />
         <Button type="submit" className="w-full">
           Register
         </Button>
