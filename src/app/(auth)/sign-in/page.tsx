@@ -30,7 +30,7 @@ export default function SignInPage() {
 
   return (
     <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md">
-      <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">Sign In</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
