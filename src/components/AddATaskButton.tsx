@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { createTask } from "@/app/api/tasks/tasks";
 import { useState } from "react";
@@ -38,6 +38,7 @@ type Schema = z.infer<typeof schema>;
 
 export default function AddATaskButton() {
   const [open, setOpen] = useState(false);
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (data: Schema) => {
@@ -45,6 +46,7 @@ export default function AddATaskButton() {
     },
     onSuccess: async () => {
       setOpen(false);
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
       toast.success("Task created succesfully");
     },
     onError: async () => {
@@ -115,9 +117,9 @@ export default function AddATaskButton() {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Priority</SelectLabel>
-                          <SelectItem value="low">Low</SelectItem>
-                          <SelectItem value="medium">Medium</SelectItem>
-                          <SelectItem value="high">High</SelectItem>
+                          <SelectItem value="LOW">Low</SelectItem>
+                          <SelectItem value="MEDIUM">Medium</SelectItem>
+                          <SelectItem value="HIGH">High</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

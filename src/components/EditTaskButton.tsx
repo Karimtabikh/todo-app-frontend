@@ -27,7 +27,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { editTask } from "@/app/api/tasks/tasks";
 import { useState } from "react";
-import { Task } from "./TasksList";
+import { formatDate } from "@/hooks/formatDate";
+import { Task } from "@/app/page";
 
 const schema = z.object({
   id: z.number(),
@@ -64,7 +65,7 @@ export default function EditTaskButton({ taskData }: { taskData: Task }) {
     defaultValues: {
       id: taskData.id,
       description: taskData.description,
-      date: taskData.date.split("-").reverse().join("-"),
+      date: formatDate(taskData.date),
       priority: taskData.priority,
     },
     resolver: zodResolver(schema),
@@ -121,9 +122,9 @@ export default function EditTaskButton({ taskData }: { taskData: Task }) {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Priority</SelectLabel>
-                          <SelectItem value="low">Low</SelectItem>
-                          <SelectItem value="medium">Medium</SelectItem>
-                          <SelectItem value="high">High</SelectItem>
+                          <SelectItem value="LOW">Low</SelectItem>
+                          <SelectItem value="MEDIUM">Medium</SelectItem>
+                          <SelectItem value="HIGH">High</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

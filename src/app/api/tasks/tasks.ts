@@ -27,13 +27,33 @@ export const createTask = async (data: TaskData) => {
   return response.json();
 };
 
-export const getTasks = async () => {
+export const getAllTasks = async () => {
   const response = await fetch(`${API_ENDPOINT}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  if (!response.ok) {
+    throw new Error("error");
+  }
+  return response.json();
+};
+
+export const getPaginatedTasks = async (
+  page: number,
+  sortBy: string,
+  searchTerm: string
+) => {
+  const response = await fetch(
+    `${API_ENDPOINT}/paginatedtasks?page=${page}&sortBy=${sortBy}&searchTerm=${searchTerm}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   if (!response.ok) {
     throw new Error("error");
   }
