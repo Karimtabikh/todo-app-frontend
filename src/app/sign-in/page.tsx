@@ -12,6 +12,7 @@ import { Mutation, useMutation, useQuery } from "@tanstack/react-query";
 import { getUser } from "../api/auth/signin";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const schema = z.object({
   email: z.string().email({ message: "Email is required" }),
@@ -26,6 +27,8 @@ export default function SignInPage() {
   const mutation = useMutation({
     mutationFn: (data: Schema) => getUser(data),
     onSuccess: (data) => {
+      console.log(data);
+      Cookies.set("token", data.access_token, { expires: 1 });
       toast.success("Logged in successfully");
       router.push("/");
     },

@@ -1,4 +1,8 @@
-const API_ENDPOINT = "http://localhost:3001/users";
+const API_ENDPOINT = "http://localhost:3001/auth/login";
+
+type LoginResponse = {
+  access_token: string;
+};
 
 type UserData = {
   email: string;
@@ -6,7 +10,7 @@ type UserData = {
 };
 
 export const getUser = async (data: UserData) => {
-  const response = await fetch(`${API_ENDPOINT}/signin`, {
+  const response = await fetch(`${API_ENDPOINT}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,5 +20,9 @@ export const getUser = async (data: UserData) => {
   if (!response.ok) {
     throw new Error("error");
   }
-  return response.json();
+
+  const resData: LoginResponse = await response.json();
+  localStorage.setItem("token", resData.access_token);
+
+  return resData;
 };
