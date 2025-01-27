@@ -30,7 +30,7 @@ export default function SignUpPage() {
     },
     onSuccess: async () => {
       toast.success("Account created succesfully");
-      router.push("/");
+      router.push("/sign-in");
     },
     onError: async () => {
       toast.error("Error creating your account");
